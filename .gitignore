@@ -2,3 +2,5 @@
 bank.csv
 marketing-campaign.ipynb
 *.pickle
+requirements2.txt
+environment_exported.yaml
