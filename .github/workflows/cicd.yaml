@@ -1,4 +1,4 @@
-name: trigger-demo
+name: ml cicd marketing campaign
 on:
   push:
     branches:
