@@ -1,4 +1,4 @@
-name: ml-cicd-marketing-campaign
+name: ml-cicd
 on:
   push:
     branches:
