@@ -7,11 +7,21 @@ on:
   pull_request:
   workflow_dispatch:
 
+defaults:
+  run:
+    shell: bash -el {0}
+
 jobs:
-  trigger-demo:
+  ml-cicd:
     runs-on: ubuntu-latest
 
     steps:
+    - name: Copy Repository Contents
+      uses: actions/checkout@main  
+    
+    - name: Install Conda environment
+      run: echo "Installing Conda environment"
+    
     - name: 1. Labeling Data
       run: echo "Labeling"
 
