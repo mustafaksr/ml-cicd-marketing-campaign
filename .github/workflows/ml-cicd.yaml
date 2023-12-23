@@ -20,7 +20,26 @@ jobs:
       uses: actions/checkout@main  
     
     - name: Install Conda environment
-      run: echo "Installing Conda environment"
+      run: |
+        conda env create --name ml-cicd --file test/conda-environment.yaml
+      shell: bash
+
+    - name: Activate Conda environment
+      run: conda activate ml-cicd 
+
+    - name: Test env
+      shell: python
+      run: |
+        import pandas as pd
+        import numpy as np
+        from sklearn.compose import ColumnTransformer
+        from xgboost import XGBClassifier
+        from lightgbm import LGBMClassifier
+        from catboost import CatBoostClassifier
+        import wandb
+        import seaborn as sns
+        import matplotlib.pyplot as plt
+        print("All Done!")
     
     - name: 1. Labeling Data
       run: echo "Labeling"
