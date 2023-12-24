@@ -3,3 +3,7 @@ marketing-campaign.ipynb
 requirements2.txt
 environment_exported.yaml
 catboost_info/
+.ipynb_checkpoints/
+train/__pycache__/utils.cpython-311.pyc
+*.pickle
+*.json
