@@ -28,40 +28,34 @@ jobs:
       run: |
         conda run -n ml-cicd python test/testlib.py
       shell: bash
-    
-    - name: 1. Labeling Data
-      run: echo "Labeling"
 
-    - name: 2a. Compose Data
-      run: echo "Composing Data"
+    - name: 1. Generate EDA Report
+      run: |
+        conda run -n ml-cicd python generate/report.py
+      shell: bash
 
-    - name: 2b. Generate EDA Report
-      run: echo "Generate wandb report"
-
-    - name: 3a. Unit Test
+    - name: 2a. Unit Test
       run: |
         conda run -n ml-cicd python test/test_add_features.py
       shell: bash
 
-      
-
-    - name: 3b. Smoke Test
+    - name: 2b. Smoke Test
       run: |
         conda run -n ml-cicd python smoke_test_train/train.py
       shell: bash
     
-    - name: 4. Hyperparameter Tuning
+    - name: 3. Hyperparameter Tuning
       run: |
         conda run -n ml-cicd python hyperparameters_tuning/tune_hyperparameter.py
       shell: bash
 
-    - name: 5. Train
+    - name: 4. Train
       run: |
         conda run -n ml-cicd python train/train.py
       shell: bash
 
-    - name: 6. Evaluate
-      run: echo "evaluate"
-
-    - name: 7. Deploy
+    - name: 5. Deploy
       run: echo "deploy"
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  WANDB_API_KEY: ${{ secrets.WANDB_API_KEY }}
