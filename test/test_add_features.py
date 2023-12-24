@@ -3,7 +3,7 @@ import unittest
 import pandas as pd
 
 # Assume you have a function add_features defined in a module or script
-from utils import add_features
+from train.utils  import add_features
 
 class TestAddFeatures(unittest.TestCase):
 
