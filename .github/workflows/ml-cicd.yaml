@@ -31,7 +31,7 @@ jobs:
 
     - name: 1. Generate EDA Report
       run: |
-        conda run -n ml-cicd python generate/report.py
+        conda run -n ml-cicd python generate_eda_report/report.py
       shell: bash
 
     - name: 2a. Unit Test
