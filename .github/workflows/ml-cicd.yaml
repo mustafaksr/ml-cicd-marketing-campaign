@@ -52,7 +52,9 @@ jobs:
       
 
     - name: 3. Smoke Test
-      run: echo "smoke test"
+      run: |
+        conda run -n ml-cicd python smoke_test_train/train.py
+      shell: bash
     
     - name: 4. Hyperparameter Tuning
       run: echo "hyperparameter tuning"
