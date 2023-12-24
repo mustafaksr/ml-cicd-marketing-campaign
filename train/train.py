@@ -17,9 +17,9 @@ from lightgbm import LGBMClassifier
 from catboost import CatBoostClassifier
 from sklearn.model_selection import KFold, cross_val_score, StratifiedKFold, cross_val_predict ,train_test_split
 import warnings
-from utils import *
+from train.utils import *
 warnings.filterwarnings("ignore")
-df = pd.read_csv(os.path.join(os.getcwd(),"train/bank.csv"))
+df = pd.read_csv("bank.csv")
 X, X_test, y, y_test = split_data(df)
 X = add_features(X)
 X_test = add_features(X_test)
@@ -167,4 +167,3 @@ with open("preprocessor.pickle","wb") as file:
 
 with open("pipeline.pickle","wb") as file:
     pickle.dump(pipeline,file)
-print("Done, pickles are saved.")
