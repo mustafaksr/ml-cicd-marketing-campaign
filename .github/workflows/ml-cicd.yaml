@@ -29,7 +29,7 @@ jobs:
     - name: Activate Conda environment
       run: |
         conda init zsh
-        source /home/runner/miniconda3/envs/ml-cicd/bin/activate
+        source /usr/share/miniconda/bin/activate
         conda activate ml-cicd 
       shell: bash
 
