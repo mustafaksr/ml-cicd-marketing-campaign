@@ -25,7 +25,10 @@ jobs:
       shell: bash
 
     - name: Activate Conda environment
-      run: conda activate ml-cicd 
+      run: |
+        conda init
+        conda activate ml-cicd 
+      shell: bash
 
     - name: Test env
       shell: python
