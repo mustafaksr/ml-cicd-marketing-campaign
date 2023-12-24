@@ -1,3 +1,4 @@
+from sklearn.model_selection import train_test_split
 def add_features(df):
     # Family Size
     df['is_elderly'] = (df['age'] >= 60).astype(int)
@@ -12,3 +13,12 @@ def add_features(df):
     df['campaign_greater_than_1'] = (df['campaign'] > 1).astype(int)
 
     return df
+def split_data(df):
+    X, X_test, y, y_test = train_test_split(
+        df.drop("deposit", axis=1), df["deposit"], test_size=0.2, stratify=df["deposit"], random_state=42)
+    # Separate features and target variable
+    X = df.drop("deposit", axis=1)
+    y = df["deposit"]
+    y = y.apply(lambda x :1 if x=="yes" else 0)
+    y_test = y_test.apply(lambda x :1 if x=="yes" else 0)
+    return X, X_test, y, y_test
