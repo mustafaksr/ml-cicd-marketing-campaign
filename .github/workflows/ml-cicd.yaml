@@ -57,7 +57,9 @@ jobs:
       shell: bash
     
     - name: 4. Hyperparameter Tuning
-      run: echo "hyperparameter tuning"
+      run: |
+        conda run -n ml-cicd python hyperparameters_tuning/tune_hyperparameter.py
+      shell: bash
 
     - name: 5. Train
       run: |
