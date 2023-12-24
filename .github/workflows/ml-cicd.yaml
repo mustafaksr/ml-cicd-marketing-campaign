@@ -33,24 +33,7 @@ jobs:
         source /usr/share/miniconda/bin/activate
         conda activate ml-cicd 
         conda run -n ml-cicd python test/testlib.py
-        ls /home/runner/anaconda3/envs/
       shell: bash
-
-
-
-    - name: Test env
-      shell: python
-      run: |
-        import pandas as pd
-        import numpy as np
-        from sklearn.compose import ColumnTransformer
-        from xgboost import XGBClassifier
-        from lightgbm import LGBMClassifier
-        from catboost import CatBoostClassifier
-        import wandb
-        import seaborn as sns
-        import matplotlib.pyplot as plt
-        print("All Done!")
     
     - name: 1. Labeling Data
       run: echo "Labeling"
@@ -58,8 +41,15 @@ jobs:
     - name: 2. Compose Data
       run: echo "Composing Data"
 
+    - name: 2. Generate EDA Report
+      run: echo "Generate wandb report"
+
     - name: 3. Unit Test
-      run: echo "unit test"
+      run: |
+        conda run -n ml-cicd python test/test_add_features.py
+      shell: bash
+
+      
 
     - name: 3. Smoke Test
       run: echo "smoke test"
@@ -68,7 +58,9 @@ jobs:
       run: echo "hyperparameter tuning"
 
     - name: 5. Train
-      run: echo "train"
+      run: |
+        conda run -n ml-cicd python train/train.py
+      shell: bash
 
     - name: 6. Evaluate
       run: echo "evaluate"
