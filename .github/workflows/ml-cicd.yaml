@@ -28,7 +28,7 @@ jobs:
 
     - name: Activate Conda environment
       run: |
-        conda init bash
+        conda init zsh
         conda activate ml-cicd 
       shell: bash
 
