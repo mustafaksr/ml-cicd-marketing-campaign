@@ -23,6 +23,14 @@ jobs:
       run: |
         conda env create --name ml-cicd --file test/conda-environment.yaml
         conda init bash
+        cat /home/runner/.bashrc
+      shell: bash
+
+    - name: Activate Conda environment
+      run: |
+        conda init zsh
+        source /home/runner/miniconda3/envs/ml-cicd/bin/activate
+        conda activate ml-cicd 
       shell: bash
 
     - name: Test env
