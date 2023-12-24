@@ -22,11 +22,13 @@ jobs:
     - name: Install Conda environment
       run: |
         conda env create --name ml-cicd --file test/conda-environment.yaml
+        conda init bash
+        cat /home/runner/.bashrc
       shell: bash
 
     - name: Activate Conda environment
       run: |
-        conda init
+        conda init bash
         conda activate ml-cicd 
       shell: bash
 
