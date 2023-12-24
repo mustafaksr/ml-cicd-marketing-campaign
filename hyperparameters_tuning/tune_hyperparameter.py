@@ -28,7 +28,7 @@ from lightgbm import LGBMClassifier
 from catboost import CatBoostClassifier
 from sklearn.model_selection import cross_val_score, StratifiedKFold, cross_val_predict ,train_test_split
 import warnings
-from train.utils import *
+from utils import *
 warnings.filterwarnings("ignore")
 df = pd.read_csv(os.path.join(os.getcwd(),"../train/bank.csv")).sample(frac=0.5, random_state=42 ).reset_index(drop=True)
 X, X_test, y, y_test = split_data(df)
