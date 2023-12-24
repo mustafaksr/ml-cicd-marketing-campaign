@@ -22,36 +22,30 @@ jobs:
     - name: Install Conda environment
       run: |
         conda env create --name ml-cicd --file test/conda-environment.yaml
-        conda init bash
-        source /usr/share/miniconda/bin/activate
-        cat /home/runner/.bashrc
       shell: bash
 
     - name: Test Conda environment
       run: |
-        conda init zsh
-        source /usr/share/miniconda/bin/activate
-        conda activate ml-cicd 
         conda run -n ml-cicd python test/testlib.py
       shell: bash
     
     - name: 1. Labeling Data
       run: echo "Labeling"
 
-    - name: 2. Compose Data
+    - name: 2a. Compose Data
       run: echo "Composing Data"
 
-    - name: 2. Generate EDA Report
+    - name: 2b. Generate EDA Report
       run: echo "Generate wandb report"
 
-    - name: 3. Unit Test
+    - name: 3a. Unit Test
       run: |
         conda run -n ml-cicd python test/test_add_features.py
       shell: bash
 
       
 
-    - name: 3. Smoke Test
+    - name: 3b. Smoke Test
       run: |
         conda run -n ml-cicd python smoke_test_train/train.py
       shell: bash
