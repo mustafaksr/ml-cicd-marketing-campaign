@@ -19,7 +19,7 @@ from sklearn.model_selection import KFold, cross_val_score, StratifiedKFold, cro
 import warnings
 from utils import *
 warnings.filterwarnings("ignore")
-df = pd.read_csv("bank.csv").sample(frac=0.25,random_state=42)
+df = pd.read_csv(os.path.join(os.getcwd(),"train/bank.csv")).sample(frac=0.25,random_state=42)
 X, X_test, y, y_test = split_data(df)
 X = add_features(X)
 X_test = add_features(X_test)
