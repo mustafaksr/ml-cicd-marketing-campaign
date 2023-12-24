@@ -19,7 +19,7 @@ from sklearn.model_selection import KFold, cross_val_score, StratifiedKFold, cro
 import warnings
 from utils import *
 warnings.filterwarnings("ignore")
-df = pd.read_csv("bank.csv")
+df = pd.read_csv(os.path.join(os.getcwd(),"train/bank.csv"))
 X, X_test, y, y_test = split_data(df)
 X = add_features(X)
 X_test = add_features(X_test)
@@ -167,3 +167,4 @@ with open("preprocessor.pickle","wb") as file:
 
 with open("pipeline.pickle","wb") as file:
     pickle.dump(pipeline,file)
+print("Done, pickles are saved.")
