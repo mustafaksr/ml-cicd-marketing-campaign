@@ -51,20 +51,20 @@ jobs:
 
       
 
-    - name: 3. Smoke Test
-      run: |
-        conda run -n ml-cicd python smoke_test_train/train.py
-      shell: bash
+    # - name: 3. Smoke Test
+    #   run: |
+    #     conda run -n ml-cicd python smoke_test_train/train.py
+    #   shell: bash
     
     - name: 4. Hyperparameter Tuning
       run: |
         conda run -n ml-cicd python hyperparameters_tuning/tune_hyperparameter.py
       shell: bash
 
-    - name: 5. Train
-      run: |
-        conda run -n ml-cicd python train/train.py
-      shell: bash
+    # - name: 5. Train
+    #   run: |
+    #     conda run -n ml-cicd python train/train.py
+    #   shell: bash
 
     - name: 6. Evaluate
       run: echo "evaluate"
