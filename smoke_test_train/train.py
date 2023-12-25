@@ -17,9 +17,17 @@ from lightgbm import LGBMClassifier
 from catboost import CatBoostClassifier
 from sklearn.model_selection import KFold, cross_val_score, StratifiedKFold, cross_val_predict ,train_test_split
 import warnings
-from utils import *
+import sys
+
+script_dir = os.path.dirname(os.path.abspath(__file__))
+
+
+project_dir = os.path.abspath(os.path.join(script_dir, ".."))
+sys.path.append(project_dir)
+
+from common.utils import *
 warnings.filterwarnings("ignore")
-df = pd.read_csv(os.path.join(os.getcwd(),"smoke_test_train/bank.csv")).sample(frac=0.25,random_state=42)
+df = pd.read_csv(os.path.join(os.getcwd(),"train/bank.csv")).sample(frac=0.25,random_state=42)
 X, X_test, y, y_test = split_data(df)
 X = add_features(X)
 X_test = add_features(X_test)
