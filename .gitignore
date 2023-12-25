@@ -9,3 +9,5 @@ train/__pycache__/utils.cpython-311.pyc
 *.json
 *.png
 wandb/
+Simple_Scikit_Integration.ipynb
+*.pyc
