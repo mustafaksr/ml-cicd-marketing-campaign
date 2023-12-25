@@ -1,4 +1,6 @@
 from sklearn.model_selection import train_test_split
+import pandas as pd
+import json
 def add_features(df):
     # Family Size
     df['is_elderly'] = (df['age'] >= 60).astype(int)
@@ -22,3 +24,36 @@ def split_data(df):
     y = y.apply(lambda x :1 if x=="yes" else 0)
     y_test = y_test.apply(lambda x :1 if x=="yes" else 0)
     return X, X_test, y, y_test
+
+def read_data(artifact_dir):
+    """
+    return train
+    """
+    dtypes = {'age': 'int64',
+                 'job': 'O',
+                 'marital': 'O',
+                 'education': 'O',
+                 'default': 'O',
+                 'balance': 'int64',
+                 'housing': 'O',
+                 'loan': 'O',
+                 'contact': 'O',
+                 'day': 'int64',
+                 'month': 'O',
+                 'duration': 'int64',
+                 'campaign': 'int64',
+                 'pdays': 'int64',
+                 'previous': 'int64',
+                 'poutcome': 'O',
+                 'deposit':'int64'
+                 }
+    with open(f"{artifact_dir}") as json_data:
+        data = json.load(json_data)
+        train = pd.DataFrame(data = data["data"],columns=data["columns"])
+        json_data.close()
+
+    for i in dtypes:
+        try:
+            train[i] = train[i].astype(dtypes[i])
+        except:pass
+    return train
