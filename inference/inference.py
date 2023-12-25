@@ -6,10 +6,10 @@ import os
 app = Flask(__name__)
 
 # Load preprocessor and pipeline
-with open(os.path.join(os.getcwd(),"preprocessor.pickle", "rb")) as file:
+with open(os.path.join(os.getcwd(),"preprocessor.pickle"), "rb") as file:
     loaded_prep = pickle.load(file)
 
-with open(os.path.join(os.getcwd(),"pipeline.pickle", "rb")) as file:
+with open(os.path.join(os.getcwd(),"pipeline.pickle"), "rb") as file:
     loaded_pipeline = pickle.load(file)
 
 @app.route('/predict', methods=['POST'])
