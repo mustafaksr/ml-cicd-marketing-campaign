@@ -149,4 +149,4 @@ for image_name in pics:
 
 report.blocks = objects
 report.save()
-print(report.url)
+print(f"auto-generated report url: {report.url}")
