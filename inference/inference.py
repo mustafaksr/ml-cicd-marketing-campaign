@@ -5,7 +5,11 @@ import os
 import threading
 import time
 from concurrent.futures import ThreadPoolExecutor
+import multiprocessing
 
+# Get the number of CPUs using os.cpu_count()
+num_cpus = os.cpu_count()
+print(f"num cpus: {num_cpus}")
 app = Flask(__name__)
 
 # Load preprocessor and pipeline
@@ -62,9 +66,9 @@ if __name__ == '__main__':
         time.sleep(2) 
         # Wait for the server to finish
         server_future.result()
-
+        os._exit(0)
         
-
+    os._exit(0)
 
     
     
