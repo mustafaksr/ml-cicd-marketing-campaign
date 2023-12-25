@@ -7,3 +7,4 @@ xgboost==2.0.3
 lightgbm==4.2.0
 catboost==1.2.2
 wandb==0.16.1
+Flask==3.0.0
