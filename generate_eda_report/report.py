@@ -123,7 +123,7 @@ run_name = run.name
 report = wr.Report(
   entity=entity_,
   project=project_,
-  title='1-EDA'+current_date,
+  title='1-EDA-'+current_date,
   description="Automatic EDA Report"
 )  
 pics = [str(file).split(".png")[0].split("/")[-1]+".png" for file in run.files(names=[]) if (".png" in str(file)) ]
@@ -132,7 +132,7 @@ for table in ["train_df","raw_stats_table"]:
     header = wr.H1(text=table)
     pg = wr.PanelGrid(
               runsets=[
-                  wr.Runset(entity_, project_, '1-EDA'+current_date)],
+                  wr.Runset(entity_, project_, '1-EDA-'+current_date)],
               panels=[ wr.WeavePanelSummaryTable(table)
                   
               ]
