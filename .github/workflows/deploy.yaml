@@ -48,8 +48,8 @@ jobs:
       env:
         WANDB_API_KEY: ${{ secrets.WANDB_API_KEY }}
         WANDB_RUN_ID: "${{ steps.get-runid-value.outputs.RUN_ID }}"
-        WANDB_RUN_PATH: "mustafaksr/ml-cicd-marketing-campaign-wb/"
-        WANDB_REGISTRY_PATH: "mustafakeser/marketing-campaign-wb/pipeline_fbtydk8g"
+        WANDB_RUN_PATH: "mustafakeser/marketing-campaign-wb/"
+        WANDB_REGISTRY_PATH: "mustafakeser/model-registry/My Registered Model"
         
     - name: Create a deployment
       if: steps.wandb-promote.outcome == 'success' 
