@@ -42,6 +42,34 @@ The project follows a structured layout:
 - **test:** Contains Conda environment specifications and test scripts.
 - **train:** Contains data (`bank.csv`) and scripts for model training.
 
+```
+├── client
+│   ├── deployment.py
+│   └── promote_model.py
+├── common
+│   ├── __init__.py
+│   └── utils.py
+├── generate_eda_report
+│   └── report.py
+├── hyperparameters_tuning
+│   └── tune_hyperparameter.py
+├── inference
+│   └── inference.py
+├── smoke_test_train
+│   └── train.py
+├── test
+│   ├── conda-environment.yaml
+│   ├── test_add_features.py
+│   └── testlib.py
+├── train
+│   ├── bank.csv
+│   └── train.py
+├── LICENSE
+├── README.md
+├── requirements.txt
+```
+
+
 ## Secrets
 
 The workflow relies on the following secrets:
