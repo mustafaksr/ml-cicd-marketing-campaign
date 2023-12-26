@@ -14,6 +14,9 @@ defaults:
 jobs:
   ml-cicd:
     runs-on: ubuntu-latest
+    env:
+      CUSTOM_DATE: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' && format('{0:%Y-%m-%d-%H-%M-%S}', github.event.head_commit.timestamp) || '' }}
+
 
     steps:
     - name: Copy Repository Contents
