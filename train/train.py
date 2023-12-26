@@ -288,5 +288,23 @@ with open("preprocessor.pickle","wb") as file:
 
 with open("pipeline.pickle","wb") as file:
     pickle.dump(pipeline,file)
-    
+
+
+# Save the dummy model to W&B
+best_model = wandb.Artifact(f"pipeline_{run.id}", type="pipeline")
+best_model.add_file("pipeline.pickle")
+run.log_artifact(best_model)
+
+# Link the model to the Model Registry
+run.link_artifact(best_model, "model-registry/My Registered Model")
+
+# Save the dummy model to W&B
+final_preprocessor = wandb.Artifact(f"preprocessor_{run.id}", type="preprocessor")
+final_preprocessor.add_file("preprocessor.pickle")
+run.log_artifact(final_preprocessor)
+
+# Link the model to the Model Registry
+run.link_artifact(final_preprocessor, "model-registry/My Registered Preprocessor")
+
+
 wandb.finish()
