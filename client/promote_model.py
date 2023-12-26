@@ -10,8 +10,6 @@ run_path = os.environ['WANDB_RUN_PATH']
 registry_path = os.environ['WANDB_REGISTRY_PATH']
 tag = os.environ.get('WANDB_TAG', 'production candidate')
 
-run_id = 'fbtydk8g'
-run_path = 'mustafakeser/marketing-campaign-wb/'
 api = wandb.Api()
 run = api.run(f'{run_path}/{run_id}')
 
