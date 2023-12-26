@@ -22,7 +22,7 @@ jobs:
 
     - name: Set Current Date
       run: |
-        echo "CURRENT_DATE=$(date +%Y-%m-%d-%H-%M-%S)" >> $GITHUB_ENV
+        echo "CUSTOM_DATE=$(date +%Y-%m-%d-%H-%M-%S)" >> $GITHUB_ENV
 
     - name: Copy Repository Contents
       uses: actions/checkout@main  
