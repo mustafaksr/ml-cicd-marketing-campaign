@@ -91,7 +91,7 @@ plt.savefig("bar_plots_cat_counts.png", format="png")
 fig,ax = plt.subplots(4,2,figsize=(14,14))
 axs = ax.flatten()
 for i,col in enumerate(num_cols):
-#     df[[col,'month']].groupby('month').mean().loc[["jan","feb","mar","may","apr","may","jun","jul","aug","sep","oct","nov","dec"]].plot(ax=axs[i])
+#     df[[col,'month']].groupby('month').mean().loc[["jan","feb","mar","apr","may","jun","jul","aug","sep","oct","nov","dec"]].plot(ax=axs[i])
     axs[i].plot(df[[col,'month']].groupby('month').mean().loc[["jan","feb","mar","apr","may","jun","jul","aug","sep","oct","nov","dec"]].index,df[[col,'month']].groupby('month').mean().loc[["jan","feb","mar","apr","may","jun","jul","aug","sep","oct","nov","dec"]].values,label="both")
     axs[i].plot(df[df["deposit"]=="yes"][[col,'month']].groupby('month').mean().loc[["jan","feb","mar","apr","may","jun","jul","aug","sep","oct","nov","dec"]].index,df[df["deposit"]=="yes"][[col,'month']].groupby('month').mean().loc[["jan","feb","mar","apr","may","jun","jul","aug","sep","oct","nov","dec"]].values,label="yes")
     axs[i].plot(df[df["deposit"]=="no"][[col,'month']].groupby('month').mean().loc[["jan","feb","mar","apr","may","jun","jul","aug","sep","oct","nov","dec"]].index,df[df["deposit"]=="no"][[col,'month']].groupby('month').mean().loc[["jan","feb","mar","apr","may","jun","jul","aug","sep","oct","nov","dec"]].values,label="no")
@@ -123,7 +123,7 @@ run_name = run.name
 report = wr.Report(
   entity=entity_,
   project=project_,
-  title='EDA',
+  title='1-EDA'+current_date,
   description="Automatic EDA Report"
 )  
 pics = [str(file).split(".png")[0].split("/")[-1]+".png" for file in run.files(names=[]) if (".png" in str(file)) ]
@@ -132,7 +132,7 @@ for table in ["train_df","raw_stats_table"]:
     header = wr.H1(text=table)
     pg = wr.PanelGrid(
               runsets=[
-                  wr.Runset(entity_, project_, "EDA")],
+                  wr.Runset(entity_, project_, '1-EDA'+current_date)],
               panels=[ wr.WeavePanelSummaryTable(table)
                   
               ]
