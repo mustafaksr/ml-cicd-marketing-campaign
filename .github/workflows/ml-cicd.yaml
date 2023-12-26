@@ -14,11 +14,16 @@ defaults:
 jobs:
   ml-cicd:
     runs-on: ubuntu-latest
-    env:
-      CUSTOM_DATE: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' && format('{0:%Y-%m-%d-%H-%M-%S}', github.event.head_commit.timestamp) || '' }}
+    
+
 
 
     steps:
+
+    - name: Set Current Date
+      run: |
+        echo "CURRENT_DATE=$(date +%Y-%m-%d-%H-%M-%S)" >> $GITHUB_ENV
+
     - name: Copy Repository Contents
       uses: actions/checkout@main  
     
