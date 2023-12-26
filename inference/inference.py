@@ -17,7 +17,7 @@ run = wandb.init(
                 project=project_, 
                 entity=entity_, 
                    job_type="train",
-                name = "TEST-API-"+custom_date,
+                name = "5-TEST-API-"+custom_date,
                 tags = ["TEST"]
                 
     )
