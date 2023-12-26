@@ -31,12 +31,12 @@ from wandb.sklearn import plot_class_proportions, plot_learning_curve, plot_roc
 name_="mustafakeser"
 project_="marketing-campaign-wb"
 entity_=None
-
+custom_date = os.environ["CUSTOM_DATE"]
 run = wandb.init(
                 project=project_, 
                 entity=entity_, 
                    job_type="split",
-                name = "04-Train",
+                name = "04a-Train-"+custom_date,
                 tags = ["SPLIT"]
                 
     )
@@ -72,7 +72,7 @@ run = wandb.init(
                 project=project_, 
                 entity=entity_, 
                    job_type="train",
-                name = "04-Train",
+                name = "04b-Train-"+custom_date,
                 tags = ["TRAIN"]
                 
     )
