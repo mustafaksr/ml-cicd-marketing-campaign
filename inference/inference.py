@@ -12,11 +12,12 @@ app = Flask(__name__)
 name_="mustafakeser"
 project_="marketing-campaign-wb"
 entity_=None
+custom_date = os.environ["CUSTOM_DATE"]
 run = wandb.init(
                 project=project_, 
                 entity=entity_, 
                    job_type="train",
-                name = "TEST API",
+                name = "TEST-API-"+custom_date,
                 tags = ["TEST"]
                 
     )
@@ -75,6 +76,7 @@ def send_curl():
 
     print("\nTest Successful")
     print("Server is being closed...")
+    run.finish()
     os._exit(0)
 
 if __name__ == '__main__':
