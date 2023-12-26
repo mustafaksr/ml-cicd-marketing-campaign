@@ -18,7 +18,7 @@ if art:
     assert len(art) == 1, 'More then 1 artifact of type model!'
     art[0].link(registry_path, aliases=[tag])
 
-versions = api.artifact_versions('model', registry_path)
+versions = api.artifact_versions('pipeline', registry_path)
 latest_model = versions[0]
 query = urlencode({'selectionPath': registry_path, 'version': latest_model.version})
 registry_url = f'https://wandb.ai/{latest_model.entity}/registry/model?{query}'
