@@ -13,8 +13,10 @@ name_="mustafakeser"
 project_="marketing-campaign-wb"
 entity_=None
 # Get the current date
-current_date = datetime.now().strftime("%Y-%m-%d %H:%M:%S").replace(" ","-").replace(":","-")
-os.environ["CUSTOM_DATE"] = current_date
+# current_date = datetime.now().strftime("%Y-%m-%d %H:%M:%S").replace(" ","-").replace(":","-")
+
+current_date = os.environ["CUSTOM_DATE"]
+
 # Original string
 original_string = "eda-"
 
