@@ -245,7 +245,7 @@ for fold, (train_idx, valid_idx) in enumerate(stratified_kfold.split(X, y), star
     model_name=f"pipeline_fold_{fold}",
     feature_names=None,
     )
-
+    break
 
 
 # Print mean Brier Score Loss for all folds
