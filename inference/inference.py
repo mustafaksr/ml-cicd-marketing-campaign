@@ -1,23 +1,47 @@
 from flask import Flask, request, jsonify
-import pickle
+import pickle , os , time , wandb
 import pandas as pd
-import os
-import threading
-import time
 from concurrent.futures import ThreadPoolExecutor
-import multiprocessing
+
 
 # Get the number of CPUs using os.cpu_count()
 num_cpus = os.cpu_count()
 print(f"num cpus: {num_cpus}")
 app = Flask(__name__)
 
+name_="mustafakeser"
+project_="marketing-campaign-wb"
+entity_=None
+run = wandb.init(
+                project=project_, 
+                entity=entity_, 
+                   job_type="train",
+                name = "TEST API",
+                tags = ["TEST"]
+                
+    )
+
+artifact = run.use_artifact(f'mustafakeser/marketing-campaign-wb/pipeline_fbtydk8g:v0', type='pipeline')
+artifact_dir = artifact.download()
+
+artifact2 = run.use_artifact(f'mustafakeser/marketing-campaign-wb/preprocessor_fbtydk8g:v0', type='preprocessor')
+artifact_dir2 = artifact2.download()
+
+
+
+
+
+
 # Load preprocessor and pipeline
-with open(os.path.join(os.getcwd(), "preprocessor.pickle"), "rb") as file:
+with open(os.path.join(artifact_dir2,"preprocessor.pickle"), "rb") as file:
     loaded_prep = pickle.load(file)
 
-with open(os.path.join(os.getcwd(), "pipeline.pickle"), "rb") as file:
+with open(os.path.join(artifact_dir,"pipeline.pickle"), "rb") as file:
     loaded_pipeline = pickle.load(file)
+
+
+
+
 
 @app.route('/predict', methods=['POST'])
 def predict():
@@ -51,8 +75,6 @@ def send_curl():
 
     print("\nTest Successful")
     print("Server is being closed...")
-    time.sleep(3) 
-    # Stop the server gracefully
     os._exit(0)
 
 if __name__ == '__main__':
@@ -69,7 +91,7 @@ if __name__ == '__main__':
         os._exit(0)
         
     os._exit(0)
-
+os._exit(0)
     
     
 
