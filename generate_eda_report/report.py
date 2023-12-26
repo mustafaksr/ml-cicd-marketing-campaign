@@ -13,20 +13,21 @@ name_="mustafakeser"
 project_="marketing-campaign-wb"
 entity_=None
 # Get the current date
-current_date = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-
+current_date = datetime.now().strftime("%Y-%m-%d %H:%M:%S").replace(" ","-").replace(":","-")
+os.environ["CUSTOM_DATE"] = current_date
 # Original string
 original_string = "eda-"
 
 # Concatenate the date with the string
-run_id = (original_string + current_date).replace(" ","-").replace(":","-")
-run_id
+
+run_id = (original_string + current_date)
+
 
 df = pd.read_csv("train/bank.csv")
 
 run = wandb.init(
     project=project_, 
-    name = "1-EDA-report",
+    name = "1-EDA-report-"+current_date,
     tags = ["EDA"],
     entity=entity_, 
     job_type="exploratory-data-analysis",
