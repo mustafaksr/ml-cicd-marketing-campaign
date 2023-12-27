@@ -1,6 +1,3 @@
-# Number of folds
-n_folds = 3
-seed = 42 
 from sklearn.model_selection import StratifiedKFold
 from lightgbm import LGBMClassifier
 from catboost import CatBoostClassifier
@@ -34,10 +31,42 @@ project_dir = os.path.abspath(os.path.join(script_dir, ".."))
 sys.path.append(project_dir)
 from common.utils import *
 
+# Number of folds
+n_folds = 3
+seed = 42 
+
+import wandb
+from wandb.sklearn import plot_precision_recall, plot_feature_importances
+from wandb.sklearn import plot_class_proportions, plot_learning_curve, plot_roc
+
+name_="mustafakeser"
+project_="marketing-campaign-wb"
+entity_=None
+custom_date = os.environ["CUSTOM_DATE"]
+run = wandb.init(
+                project=project_, 
+                entity=entity_, 
+                   job_type="tune",
+                name = "03-HyperTune-"+custom_date,
+                tags = ["TUNE"]
+                
+    )
 
 
 warnings.filterwarnings("ignore")
-df = pd.read_csv(os.path.join(os.getcwd(),"train/bank.csv")).sample(frac=0.5, random_state=42 ).reset_index(drop=True)
+# df = pd.read_csv(os.path.join(os.getcwd(),"train/bank.csv")).sample(frac=0.5, random_state=42 ).reset_index(drop=True)
+
+if "artifacts" not in os.listdir():
+    raw_data_at = run.use_artifact('mustafakeser/marketing-campaign-wb/marketing-campaign-wb:v1', 
+                                                    type='raw_data')
+    artifact_dir = raw_data_at.download()
+
+    df = read_data(os.path.join(artifact_dir,"df.table.json"))
+else: 
+    df = read_data(os.path.join(os.getcwd(),"artifacts/marketing-campaign-wb:v1/df.table.json"))
+
+df = df.sample(frac=0.5, random_state=42 ).reset_index(drop=True)
+
 X, X_test, y, y_test = split_data(df)
 X = add_features(X)
 X_test = add_features(X_test)
@@ -218,9 +247,28 @@ if tune:
         best_params[model_name] = best_param
         print(f"\n\nmodelname: {model_name}, cv score : {round(randomized_search.best_score_,5)}\n\n")
 
+        wandb.log({f"modelname: {model_name}, cv score ": round(randomized_search.best_score_,5)})
+
+
+
+
     # Now you have the best-tuned models for each algorithm in best_models dictionary
     print("\nbest scores",best_scores)
     print("\nbest parameters",best_params)
-    
+
+
 with open("best_parameters.json","w") as file: 
     json.dump(best_params,file)
+
+with open("best_scores.json","w") as file: 
+    json.dump(best_scores,file)
+
+best_parameters = wandb.Artifact(f"best-params-{custom_date}", type="json")
+best_parameters.add_file("best_parameters.json")
+run.log_artifact(best_parameters)
+
+best_scores = wandb.Artifact(f"best-scores-{custom_date}", type="json")
+best_scores.add_file("best_scores.json")
+run.log_artifact(best_scores)
+
+run.finish()
